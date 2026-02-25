@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frequência - 2º Ano EM</title>
+
+<style>
+body{
+  font-family:'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#1f1c2c,#928dab);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  margin:0;
+}
+
+.card{
+  background:white;
+  padding:50px;
+  border-radius:25px;
+  width:460px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.35);
+  text-align:center;
+  animation:fadeIn 0.8s ease-in-out;
+}
+
+h1{
+  margin:0;
+  font-size:26px;
+  color:#4a4a6a;
+}
+
+h2{
+  font-weight:normal;
+  font-size:15px;
+  color:#666;
+  margin-bottom:30px;
+}
+
+select{
+  width:100%;
+  padding:16px;
+  border-radius:15px;
+  border:1px solid #ccc;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+.btn{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:15px;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
+  margin-top:12px;
+  transition:0.2s;
+}
+
+.entrada{
+  background:#6c5ce7;
+  color:white;
+}
+
+.entrada:hover{
+  background:#5a4bd6;
+}
+
+.saida{
+  background:#fd79a8;
+  color:white;
+}
+
+.saida:hover{
+  background:#e66797;
+}
+
+.status{
+  margin-top:25px;
+  font-weight:bold;
+  min-height:22px;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(25px);}
+  to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Frequência Digital</h1>
+  <h2>2º Ano do Ensino Médio – Escola Presbiteriana do Coqueiro</h2>
+
+  <select id="nome">
+    <option>Ana Victória Santos de Souza</option>
+    <option>André Ricardo Ribeiro Oliveira</option>
+    <option>Ana Carolina Rocha Sales</option>
+    <option>Diogo dos Santos Rodrigues</option>
+    <option>Samara Barbosa Tavares da Silva</option>
+    <option>Gabriel Teixeira Grip</option>
+    <option>Erick Augusto do Vale da Rocha</option>
+  </select>
+
+  <button class="btn entrada" onclick="registrar('Entrada')">Registrar Entrada</button>
+  <button class="btn saida" onclick="registrar('Saída')">Registrar Saída</button>
+
+  <div id="msg" class="status"></div>
+</div>
+
+<script>
+
+const url = "https://script.google.com/macros/s/AKfycbwjINaiTm2wbZKhLRDqZBazg86DeXdOCzjtoq7uBOHECK-y_X_hrnSErlsk41XgVjleKg/exec";
+
+function registrar(tipo){
+
+  const nome = document.getElementById("nome").value;
+  const msg = document.getElementById("msg");
+
+  msg.style.color = "#333";
+  msg.innerText = "Registrando...";
+
+  const linkFinal = url + 
+    "?nome=" + encodeURIComponent(nome) +
+    "&tipo=" + encodeURIComponent(tipo);
+
+  const iframe = document.createElement("iframe");
+  iframe.style.display = "none";
+  iframe.src = linkFinal;
+  document.body.appendChild(iframe);
+
+  setTimeout(() => {
+    msg.style.color = "green";
+    msg.innerText = "Registro realizado com sucesso!";
+    document.body.removeChild(iframe);
+  }, 1500);
+}
+
+</script>
+
+</body>
+</html>
